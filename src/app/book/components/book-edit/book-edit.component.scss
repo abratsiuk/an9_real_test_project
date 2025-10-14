@@ -1,0 +1,29 @@
+/* src/app/pages/page-book/page-book.component.scss */
+.form {
+  border: 1px solid grey;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.field label {
+  font-size: 0.75rem;
+}
+.error {
+  color: red;
+  font-size: 0.75rem;
+}
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+.submit {
+  margin-top: 1rem;
+}
