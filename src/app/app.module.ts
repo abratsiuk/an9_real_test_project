@@ -18,9 +18,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PageEmployeesComponent } from './pages/page-employees/page-employees.component';
+import { PageEmployeeComponent } from './pages/page-employee/page-employee.component';
+import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageEmployeesComponent, PageEmployeeComponent, EmployeeEditComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
