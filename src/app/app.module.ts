@@ -15,26 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BooksComponent } from './book/components/books/books.component';
-import { BookCartComponent } from './book/components/book-cart/book-cart.component';
-import { BookSearchComponent } from './book/components/book-search/book-search.component';
-import { PageBooksComponent } from './book/pages/page-books/page-books.component';
-import { BookEditComponent } from './book/components/book-edit/book-edit.component';
-import { PageBookComponent } from './book/pages/page-book/page-book.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BooksComponent,
-    BookCartComponent,
-    BookSearchComponent,
-    PageBooksComponent,
-    BookEditComponent,
-    PageBookComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
