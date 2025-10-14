@@ -1,5 +1,12 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Input } from 'postcss';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { IEmployeeRead } from '../../models/iemployee-read.model';
 import { IDepartment } from '../../models/idepartment.model';
 import { IEmployeeOption } from '../../models/iemployee-option.model';
@@ -74,7 +81,9 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
   }
   getFirstErrorMessage(field: string) {
     const c = this.form.get(field);
-    if (!c || !c.errors || !c.touched) { return null; }
+    if (!c || !c.errors || !c.touched) {
+      return null;
+    }
 
     const map: Record<string, string> = {
       firstName: 'First name',
@@ -85,10 +94,18 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
     };
 
     const e: any = c.errors;
-    if (e.required) { return `${map[field]} is required.`; }
-    if (e.min) { return `${map[field]} must be ≥ ${e.min.min}.`; }
-    if (e.max) { return `${map[field]} must be ≤ ${e.max.max}.`; }
-    if (e.maxlength) { return `Maximum length is ${e.maxlength.requiredLength}.`; }
+    if (e.required) {
+      return `${map[field]} is required.`;
+    }
+    if (e.min) {
+      return `${map[field]} must be ≥ ${e.min.min}.`;
+    }
+    if (e.max) {
+      return `${map[field]} must be ≤ ${e.max.max}.`;
+    }
+    if (e.maxlength) {
+      return `Maximum length is ${e.maxlength.requiredLength}.`;
+    }
 
     // Group-level custom errors surfaced at form-level:
     if (field === 'managerId' && this.form.errors?.selfManager) {

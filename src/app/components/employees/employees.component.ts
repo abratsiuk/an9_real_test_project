@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Input } from 'postcss';
-import { IEmployeeData } from '../../models/iemployee-data.model';
-import { Router } from '@angular/router';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {IEmployeeData} from '../../models/iemployee-data.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-employees',
