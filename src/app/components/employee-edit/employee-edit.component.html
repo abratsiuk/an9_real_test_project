@@ -1,1 +1,88 @@
-<p>employee-edit works!</p>
+<form class="form"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()">
+    <!-- First name -->
+    <mat-form-field appearance="fill"
+            class="field">
+        <mat-label>First name</mat-label>
+        <input matInput
+                formControlName="firstName"/>
+        <mat-error *ngIf="getFirstErrorMessage('firstName')">
+            {{getFirstErrorMessage('firstName')}}
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Last name -->
+    <mat-form-field appearance="fill"
+            class="field">
+        <mat-label>Last name</mat-label>
+        <input matInput
+                formControlName="lastName"/>
+        <mat-error *ngIf="getFirstErrorMessage('lastName')">
+            {{getFirstErrorMessage('lastName')}}
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Salary -->
+    <mat-form-field appearance="fill"
+            class="field">
+        <mat-label>Salary</mat-label>
+        <input matInput
+                type="number"
+                formControlName="salary"/>
+        <mat-error *ngIf="getFirstErrorMessage('salary')">
+            {{getFirstErrorMessage('salary')}}
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Department -->
+    <mat-form-field appearance="fill"
+            class="field">
+        <mat-label>Department</mat-label>
+        <mat-select formControlName="departmentId">
+            <mat-option *ngFor="let d of departments"
+                    [value]="d.id">
+                {{d.departmentName}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="getFirstErrorMessage('departmentId')">
+            {{getFirstErrorMessage('departmentId')}}
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Manager -->
+    <mat-form-field appearance="fill"
+            class="field">
+        <mat-label>Manager</mat-label>
+        <mat-select formControlName="managerId">
+            <mat-option [value]="null">(no manager)</mat-option>
+            <mat-option
+                    *ngFor="let m of managers"
+                    [value]="m.id"
+                    [disabled]="isSelf(m.id)"
+            >
+                {{m.fullName}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="getFirstErrorMessage('managerId')">
+            {{getFirstErrorMessage('managerId')}}
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Form-level custom error -->
+    <div class="form-error"
+            *ngIf="form.touched && form.errors?.selfManager">
+        Employee cannot be his own manager.
+    </div>
+
+    <div class="actions">
+        <button mat-flat-button
+                color="primary"
+                type="submit">Save
+        </button>
+        <button mat-button
+                type="button"
+                (click)="onCancel()">Cancel
+        </button>
+    </div>
+</form>

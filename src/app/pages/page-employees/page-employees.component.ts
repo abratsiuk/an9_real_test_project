@@ -1,15 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { of, Subject } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs/operators';
+import { EmployeesService } from '../../services/employees.service';
+import { IEmployeeData } from '../../models/iemployee-data.model';
 
 @Component({
   selector: 'app-page-employees',
   templateUrl: './page-employees.component.html',
-  styleUrls: ['./page-employees.component.scss']
+  styleUrls: ['./page-employees.component.scss'],
 })
-export class PageEmployeesComponent implements OnInit {
+export class PageEmployeesComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  employees: IEmployeeData[] | null = null;
 
-  constructor() { }
+  constructor(private employeesService: EmployeesService) {}
 
   ngOnInit(): void {
+    this.reload();
+  }
+  reload(): void {
+    this.employeesService
+      .loadEmployeesData()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.employees = data;
+        console.log('Loaded employees:', this.employees);
+      });
   }
 
+  onDelete(id: number): void {
+    // Simple flow: try delete; if 409 -> show message; then reload.
+    this.employeesService
+      .deleteEmployee(id)
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((err) => {
+          if (err?.status === 409) {
+            alert('This employee is a manager and cannot be deleted.');
+          } else {
+            console.error('deleteEmployee error', err);
+            alert('Delete failed. Please try again.');
+          }
+          return of(undefined);
+        }),
+      )
+      .subscribe(() => this.reload());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

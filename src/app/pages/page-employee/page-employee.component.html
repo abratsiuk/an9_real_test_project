@@ -1,1 +1,7 @@
-<p>page-employee works!</p>
+<app-employee-edit
+        [employee]="employee"
+        [departments]="departments"
+        [managers]="managers"
+        (employeeSave)="onEmployeeSave($event)"
+        (cancel)="onCancel()"
+></app-employee-edit>
