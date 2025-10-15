@@ -52,7 +52,9 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
               this.departments = deps || [];
               this.managers = opts || [];
 
-              if (this.mode === 'create') return of(null);
+              if (this.mode === 'create') {
+                return of(null);
+              }
               return this.employeesService.getEmployee(this.id);
             }),
           );
@@ -63,7 +65,6 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
       });
   }
 
-  //TODO используй только IEmployeeCreate и для обновления тоже
   onEmployeeSave(dto: IEmployeeCreate | IEmployeeUpdate) {
     this.loading = true;
 
