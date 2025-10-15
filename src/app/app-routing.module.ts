@@ -1,12 +1,14 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {PageEmployeesComponent} from './pages/page-employees/page-employees.component';
-import {PageEmployeeComponent} from './pages/page-employee/page-employee.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { PageEmployeesComponent } from './pages/page-employees/page-employees.component';
+import { PageEmployeeComponent } from './pages/page-employee/page-employee.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: PageEmployeesComponent },
   { path: 'employees', component: PageEmployeesComponent },
   { path: 'employee/:id', component: PageEmployeeComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

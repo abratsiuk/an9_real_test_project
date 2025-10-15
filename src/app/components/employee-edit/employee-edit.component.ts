@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -19,6 +20,7 @@ import { AppValidators } from '../../app-validators';
   selector: 'app-employee-edit',
   templateUrl: './employee-edit.component.html',
   styleUrls: ['./employee-edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeEditComponent implements OnInit, OnChanges {
   @Input() employee: IEmployeeRead | null = null;
@@ -101,10 +103,10 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
       return `Maximum length is ${maxlength.requiredLength} characters.`;
     }
     if (min) {
-      return `${fieldName[field]} must be greater or equal than ${min.min}.`;
+      return `${fieldName[field]} must be greater than or equal to ${min.min}.`;
     }
     if (max) {
-      return `${fieldName[field]} must be lesser or equal than ${max.max}.`;
+      return `${fieldName[field]} must be less than or equal to ${max.max}.`;
     }
 
     if (field === 'managerId' && this.form.errors?.selfManager) {
@@ -113,9 +115,11 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
     return null;
   }
 
-  /** Useful for disabling current employee in managers list (UI hint). */
   isSelf(optionId: number): boolean {
     const id = this.form.get('id')?.value as number | null;
-    return !!id && id === optionId;
+    if (!id) {
+      return false;
+    }
+    return id === optionId;
   }
 }

@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IEmployeeData } from '../../models/iemployee-data.model';
-import { Router } from '@angular/router';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output,} from '@angular/core';
+import {IEmployeeData} from '../../models/iemployee-data.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesComponent implements OnInit {
   @Input() employees: IEmployeeData[] = [];
@@ -25,7 +26,7 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {}
 
   onCreate(): void {
-    this.router.navigate(['employee', 0]);
+    this.router.navigate(['employee', 'new']);
   }
 
   onEdit(id: number): void {

@@ -4,7 +4,7 @@
   grid-gap: 0.75rem;
   max-width: 45rem;
   margin: 2.5rem auto 0;
-  padding: 0 16px;
+  padding: 0 1rem;
 }
 
 .field {
@@ -16,6 +16,7 @@
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
+  justify-content: flex-end;
 }
 
 .form-error {

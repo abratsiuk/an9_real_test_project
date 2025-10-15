@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {of, Subject} from 'rxjs';
-import {catchError, takeUntil} from 'rxjs/operators';
-import {EmployeesService} from '../../services/employees.service';
-import {IEmployeeData} from '../../models/iemployee-data.model';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { of, Subject } from 'rxjs';
+import { catchError, takeUntil } from 'rxjs/operators';
+import { EmployeesService } from '../../services/employees.service';
+import { IEmployeeData } from '../../models/iemployee-data.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-page-employees',

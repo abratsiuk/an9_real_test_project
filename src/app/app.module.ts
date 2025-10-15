@@ -23,6 +23,7 @@ import { PageEmployeeComponent } from './pages/page-employee/page-employee.compo
 import { EmployeeEditComponent } from './components/employee-edit/employee-edit.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     PageEmployeeComponent,
     EmployeeEditComponent,
     EmployeesComponent,
+    NotFoundComponent,
   ],
   imports: [
     HttpClientModule,
