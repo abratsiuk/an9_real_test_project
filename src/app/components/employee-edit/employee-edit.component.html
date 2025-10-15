@@ -1,7 +1,7 @@
 <form class="form"
         [formGroup]="form"
         (ngSubmit)="onSubmit()">
-    <!-- First name -->
+
     <mat-form-field appearance="fill"
             class="field">
         <mat-label>First name</mat-label>
@@ -12,7 +12,6 @@
         </mat-error>
     </mat-form-field>
 
-    <!-- Last name -->
     <mat-form-field appearance="fill"
             class="field">
         <mat-label>Last name</mat-label>
@@ -23,7 +22,6 @@
         </mat-error>
     </mat-form-field>
 
-    <!-- Salary -->
     <mat-form-field appearance="fill"
             class="field">
         <mat-label>Salary</mat-label>
@@ -35,7 +33,6 @@
         </mat-error>
     </mat-form-field>
 
-    <!-- Department -->
     <mat-form-field appearance="fill"
             class="field">
         <mat-label>Department</mat-label>
@@ -50,7 +47,6 @@
         </mat-error>
     </mat-form-field>
 
-    <!-- Manager -->
     <mat-form-field appearance="fill"
             class="field">
         <mat-label>Manager</mat-label>
@@ -69,7 +65,6 @@
         </mat-error>
     </mat-form-field>
 
-    <!-- Form-level custom error -->
     <div class="form-error"
             *ngIf="form.touched && form.errors?.selfManager">
         Employee cannot be his own manager.
@@ -78,7 +73,8 @@
     <div class="actions">
         <button mat-flat-button
                 color="primary"
-                type="submit">Save
+                type="submit"
+                [disabled]="form.invalid">Save
         </button>
         <button mat-button
                 type="button"

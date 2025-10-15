@@ -1,5 +1,9 @@
 .toolbar {
-  margin-bottom: 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2rem;
+  margin: 0.5rem;
 }
 
 .fullwidth {
@@ -7,7 +11,7 @@
 }
 
 .col-actions {
-  width: 120px;
+  width: 7.5rem;
   text-align: right;
 }
 
@@ -15,6 +19,6 @@
   td {
     text-align: center;
     padding: 16px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(0, 0, 0, 0.5);
   }
 }

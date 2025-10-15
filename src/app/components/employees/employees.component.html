@@ -1,7 +1,7 @@
 <div class="toolbar">
     <button mat-raised-button
             color="primary"
-            (click)="onCreate()">Add
+            (click)="onCreate()">new employee
     </button>
 </div>
 
@@ -9,7 +9,6 @@
         [dataSource]="employees"
         class="mat-elevation-z2 fullwidth">
 
-    <!-- First Name -->
     <ng-container matColumnDef="firstName">
         <th mat-header-cell
                 *matHeaderCellDef> First name
@@ -19,7 +18,6 @@
         </td>
     </ng-container>
 
-    <!-- Last Name -->
     <ng-container matColumnDef="lastName">
         <th mat-header-cell
                 *matHeaderCellDef> Last name
@@ -29,7 +27,6 @@
         </td>
     </ng-container>
 
-    <!-- Department -->
     <ng-container matColumnDef="departmentName">
         <th mat-header-cell
                 *matHeaderCellDef> Department
@@ -39,7 +36,6 @@
         </td>
     </ng-container>
 
-    <!-- Manager full name -->
     <ng-container matColumnDef="managerFullName">
         <th mat-header-cell
                 *matHeaderCellDef> Manager
@@ -49,7 +45,6 @@
         </td>
     </ng-container>
 
-    <!-- Salary -->
     <ng-container matColumnDef="salary">
         <th mat-header-cell
                 *matHeaderCellDef> Salary
@@ -59,7 +54,6 @@
         </td>
     </ng-container>
 
-    <!-- Actions -->
     <ng-container matColumnDef="actions">
         <th mat-header-cell
                 *matHeaderCellDef
@@ -88,7 +82,6 @@
     <tr mat-row
             *matRowDef="let row; columns: displayedColumns"></tr>
 
-    <!-- Empty state -->
     <tr class="empty"
             *ngIf="!employees || employees.length === 0">
         <td [attr.colspan]="displayedColumns.length">

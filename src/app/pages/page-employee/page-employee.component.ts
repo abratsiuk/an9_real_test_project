@@ -9,6 +9,7 @@ import { DepartmentsService } from '../../services/departments.service';
 import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { IEmployeeCreate } from '../../models/iemployee-create.model';
 import { IEmployeeUpdate } from '../../models/iemployee-update.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-page-employee',
@@ -29,6 +30,7 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
     private router: Router,
     private employeesService: EmployeesService,
     private departmentsService: DepartmentsService,
+    private snack: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -75,13 +77,13 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
         .subscribe(
           () => {
             this.loading = false;
-            alert('Employee updated successfully.');
+            this.snack.open('Employee updated successfully.', 'OK', { duration: 3000 });
             this.router.navigate(['/employees']);
           },
           (err) => {
             this.loading = false;
             console.error('updateEmployee error', err);
-            alert('Failed to update employee.');
+            this.snack.open('Failed to update employee.', 'Dismiss', { duration: 4000 });
           },
         );
     } else {
@@ -92,16 +94,16 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
           (newId) => {
             this.loading = false;
             if (newId) {
-              alert('Employee created successfully.');
+              this.snack.open('Employee created successfully.', 'OK', { duration: 3000 });
             } else {
-              alert('Employee created (no id returned).');
+              this.snack.open('Employee created (no id returned).', 'OK', { duration: 3000 });
             }
             this.router.navigate(['/employees']);
           },
           (err) => {
             this.loading = false;
             console.error('createEmployee error', err);
-            alert('Failed to create employee.');
+            this.snack.open('Failed to create employee.', 'Dismiss', { duration: 4000 });
           },
         );
     }

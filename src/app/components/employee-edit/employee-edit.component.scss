@@ -1,24 +1,26 @@
 .form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 12px;
-  max-width: 720px;
+  grid-gap: 0.75rem;
+  max-width: 45rem;
+  margin: 2.5rem auto 0;
+  padding: 0 16px;
 }
 
 .field {
-  min-width: 200px;
+  min-width: 12rem;
 }
 
 .actions {
   grid-column: 1 / -1;
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .form-error {
   grid-column: 1 / -1;
   color: #c62828;
-  font-size: 13px;
-  margin-top: -4px;
+  font-size: 0.75rem;
+  margin-top: -0.25rem;
 }

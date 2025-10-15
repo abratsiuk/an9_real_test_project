@@ -1,19 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { IEmployeeRead } from '../../models/iemployee-read.model';
-import { IDepartment } from '../../models/idepartment.model';
-import { IEmployeeOption } from '../../models/iemployee-option.model';
-import { IEmployeeCreate } from '../../models/iemployee-create.model';
-import { IEmployeeUpdate } from '../../models/iemployee-update.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppValidators } from '../../app-validators';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges,} from '@angular/core';
+import {IEmployeeRead} from '../../models/iemployee-read.model';
+import {IDepartment} from '../../models/idepartment.model';
+import {IEmployeeOption} from '../../models/iemployee-option.model';
+import {IEmployeeCreate} from '../../models/iemployee-create.model';
+import {IEmployeeUpdate} from '../../models/iemployee-update.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AppValidators} from '../../app-validators';
 
 @Component({
   selector: 'app-employee-edit',
@@ -33,12 +25,12 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this.fb.group(
       {
-        id: [0], // hidden technical control for validation only
+        id: [0],
         firstName: ['', [Validators.required, Validators.maxLength(100)]],
         lastName: ['', [Validators.required, Validators.maxLength(100)]],
-        salary: [0, [Validators.required, Validators.min(0)]],
+        salary: [null, [Validators.required, Validators.min(0)]],
         departmentId: [null, [Validators.required]],
-        managerId: [null], // optional
+        managerId: [null],
       },
       { validators: [AppValidators.selfManager] },
     );
@@ -53,6 +45,7 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
       this.form.patchValue(this.employee);
     }
   }
+
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -60,10 +53,6 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
     }
     const v = this.form.value;
 
-    // TODO use mode 'create' | 'edit' if needed
-    // const mode = v.id ? 'edit' : 'create';
-
-    // Build payload without 'id'
     const payload: IEmployeeCreate | IEmployeeUpdate = {
       firstName: v.firstName,
       lastName: v.lastName,
@@ -77,15 +66,14 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
 
   onCancel(): void {
     this.cancel.emit();
-    // TODO go tp the list
   }
+
   getFirstErrorMessage(field: string) {
-    const c = this.form.get(field);
-    if (!c || !c.errors || !c.touched) {
+    const control = this.form.get(field);
+    if (!control || !control.errors || !control.touched) {
       return null;
     }
-
-    const map: Record<string, string> = {
+    const fieldName = {
       firstName: 'First name',
       lastName: 'Last name',
       salary: 'Salary',
@@ -93,25 +81,24 @@ export class EmployeeEditComponent implements OnInit, OnChanges {
       managerId: 'Manager',
     };
 
-    const e: any = c.errors;
-    if (e.required) {
-      return `${map[field]} is required.`;
+    const required = control.getError('required');
+    const minlength = control.getError('minlength');
+    const min = control.getError('min');
+
+    if (required) {
+      return `${fieldName[field]} is required.`;
     }
-    if (e.min) {
-      return `${map[field]} must be ≥ ${e.min.min}.`;
+    if (minlength) {
+      return `Minimum length is ${minlength.requiredLength} characters.`;
     }
-    if (e.max) {
-      return `${map[field]} must be ≤ ${e.max.max}.`;
-    }
-    if (e.maxlength) {
-      return `Maximum length is ${e.maxlength.requiredLength}.`;
+    if (min) {
+      return `${fieldName[field]} must be greater or equal than ${min.min}.`;
     }
 
-    // Group-level custom errors surfaced at form-level:
     if (field === 'managerId' && this.form.errors?.selfManager) {
       return `Employee cannot be his own manager.`;
     }
-    return 'Invalid value.';
+    return null;
   }
 
   /** Useful for disabling current employee in managers list (UI hint). */

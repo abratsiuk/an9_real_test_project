@@ -12,12 +12,10 @@ import { IEmployeeUpdate } from '../models/iemployee-update.model';
   providedIn: 'root',
 })
 export class EmployeesService {
-  // Adjust to your backend URL/port
   baseUrl = 'http://localhost:5260';
 
   constructor(private http: HttpClient) {}
 
-  /** Table data: id, first/last, departmentName, managerFullName, salary */
   loadEmployeesData(): Observable<IEmployeeData[] | null> {
     return this.http.get<IEmployeeData[]>(`${this.baseUrl}/api/employees`).pipe(
       catchError((err) => {
@@ -27,7 +25,6 @@ export class EmployeesService {
     );
   }
 
-  /** Options list: id + full name */
   getOptions(): Observable<IEmployeeOption[] | null> {
     return this.http.get<IEmployeeOption[]>(`${this.baseUrl}/api/employees/options`).pipe(
       catchError((err) => {
@@ -37,7 +34,6 @@ export class EmployeesService {
     );
   }
 
-  /** Read single (for edit form) */
   getEmployee(id: number): Observable<IEmployeeRead | null> {
     return this.http.get<IEmployeeRead>(`${this.baseUrl}/api/employees/${id}`).pipe(
       catchError((err) => {
@@ -47,7 +43,6 @@ export class EmployeesService {
     );
   }
 
-  /** Create employee (backend returns plain number = newId) */
   createEmployee(dto: IEmployeeCreate): Observable<number | null> {
     return this.http.post<number>(`${this.baseUrl}/api/employees`, dto).pipe(
       catchError((err) => {
@@ -57,7 +52,6 @@ export class EmployeesService {
     );
   }
 
-  /** Update employee */
   updateEmployee(id: number, dto: IEmployeeUpdate): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/api/employees/${id}`, dto).pipe(
       catchError((err) => {
@@ -67,7 +61,6 @@ export class EmployeesService {
     );
   }
 
-  /** Delete employee */
   deleteEmployee(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/api/employees/${id}`).pipe(
       catchError((err) => {
