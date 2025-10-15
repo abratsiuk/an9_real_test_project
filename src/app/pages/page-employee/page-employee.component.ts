@@ -34,7 +34,6 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // 1) Read id from route and decide mode
     this.route.paramMap
       .pipe(
         takeUntil(this.destroy$),
@@ -43,7 +42,6 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
           this.id = id || 0;
           this.mode = this.id ? 'edit' : 'create';
 
-          // 2) Load dropdowns in parallel
           return forkJoin({
             deps: this.departmentsService.getAll().pipe(catchError(() => of([] as IDepartment[]))),
             opts: this.employeesService
@@ -54,8 +52,7 @@ export class PageEmployeeComponent implements OnInit, OnDestroy {
               this.departments = deps || [];
               this.managers = opts || [];
 
-              // 3) For edit mode, load employee
-              if (!this.id) return of(null);
+              if (this.mode === 'create') return of(null);
               return this.employeesService.getEmployee(this.id);
             }),
           );

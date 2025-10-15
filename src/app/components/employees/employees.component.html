@@ -65,12 +65,14 @@
             <button mat-icon-button
                     color="primary"
                     (click)="onEdit(e.id)"
+                    matTooltip="Edit employee"
                     aria-label="Edit">
                 <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button
                     color="warn"
-                    (click)="onDelete(e.id)"
+                    (click)="onDelete(e)"
+                    matTooltip="Delete employee"
                     aria-label="Delete">
                 <mat-icon>delete</mat-icon>
             </button>

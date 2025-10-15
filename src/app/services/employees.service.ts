@@ -7,6 +7,7 @@ import { IEmployeeOption } from '../models/iemployee-option.model';
 import { IEmployeeRead } from '../models/iemployee-read.model';
 import { IEmployeeCreate } from '../models/iemployee-create.model';
 import { IEmployeeUpdate } from '../models/iemployee-update.model';
+import { IEmployeeCanDelete } from '../models/iemployee-can-delete.model';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,14 @@ export class EmployeesService {
       catchError((err) => {
         console.error('deleteEmployee error', err);
         return of(undefined);
+      }),
+    );
+  }
+  canDelete(id: number): Observable<IEmployeeCanDelete> {
+    return this.http.get<IEmployeeCanDelete>(`${this.baseUrl}/api/employees/${id}/can-delete`).pipe(
+      catchError((err) => {
+        console.error('canDelete error', err);
+        return of({ canDelete: false, reason: 'Unexpected error. Please try again.' });
       }),
     );
   }

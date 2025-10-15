@@ -1,6 +1,13 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output,} from '@angular/core';
-import {IEmployeeData} from '../../models/iemployee-data.model';
-import {Router} from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { IEmployeeData } from '../../models/iemployee-data.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -10,7 +17,7 @@ import {Router} from '@angular/router';
 })
 export class EmployeesComponent implements OnInit {
   @Input() employees: IEmployeeData[] = [];
-  @Output() delete = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<IEmployeeData>();
 
   displayedColumns = [
     'firstName',
@@ -33,7 +40,7 @@ export class EmployeesComponent implements OnInit {
     this.router.navigate(['employee', id]);
   }
 
-  onDelete(id: number): void {
-    this.delete.emit(id);
+  onDelete(employee: IEmployeeData): void {
+    this.delete.emit(employee);
   }
 }
