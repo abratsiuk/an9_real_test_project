@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {IEmployeeData} from '../../models/iemployee-data.model';
-import {Router} from '@angular/router';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { IEmployeeData } from '../../models/iemployee-data.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees-cards',
@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class EmployeesCardsComponent {
   @Input() employees: IEmployeeData[] = [];
-  @Output() delete = new EventEmitter<IEmployeeData>();
+  @Output() deleteEmployee = new EventEmitter<IEmployeeData>();
 
   constructor(private router: Router) {}
 
@@ -23,7 +23,7 @@ export class EmployeesCardsComponent {
   }
 
   onDelete(employee: IEmployeeData): void {
-    this.delete.emit(employee);
+    this.deleteEmployee.emit(employee);
   }
 
   trackByEmployeeId(index: number, employee: IEmployeeData): number {

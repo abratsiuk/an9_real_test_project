@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class EmployeesComponent implements OnInit {
   @Input() employees: IEmployeeData[] = [];
-  @Output() delete = new EventEmitter<IEmployeeData>();
+  @Output() deleteEmployee = new EventEmitter<IEmployeeData>();
 
   displayedColumns = [
     'firstName',
@@ -41,6 +41,6 @@ export class EmployeesComponent implements OnInit {
   }
 
   onDelete(employee: IEmployeeData): void {
-    this.delete.emit(employee);
+    this.deleteEmployee.emit(employee);
   }
 }
