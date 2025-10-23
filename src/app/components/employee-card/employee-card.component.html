@@ -1,1 +1,52 @@
-<p>employee-card works!</p>
+<mat-card class="employee-card mat-elevation-z2">
+    <mat-card-content>
+        <div class="name">
+            {{employee.firstName}} {{employee.lastName}}
+        </div>
+
+        <div class="info">
+            <div class="info-item">
+                <mat-icon class="icon"
+                        matTooltip="Department">apartment
+                </mat-icon>
+                <span>{{employee.departmentName}}</span>
+            </div>
+
+            <div class="info-item">
+                <mat-icon class="icon"
+                        matTooltip="Manager">supervisor_account
+                </mat-icon>
+                <span>{{employee.managerFullName || '—'}}</span>
+            </div>
+
+            <div class="info-item">
+                <mat-icon class="icon"
+                        matTooltip="Salary">attach_money
+                </mat-icon>
+                <span>{{employee.salary | number:'1.0-2'}}</span>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button
+                mat-icon-button
+                color="primary"
+                (click)="onEdit()"
+                matTooltip="Edit employee"
+                aria-label="Edit"
+        >
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+                mat-icon-button
+                color="warn"
+                (click)="onDelete()"
+                matTooltip="Delete employee"
+                aria-label="Delete"
+        >
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

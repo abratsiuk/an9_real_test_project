@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+.cards-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+app-employee-card {
+  display: block;
+  height: 100%;
+}
+
+app-employee-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+}

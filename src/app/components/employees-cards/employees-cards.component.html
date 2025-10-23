@@ -1,1 +1,16 @@
-<p>employees-cards works!</p>
+<div class="cards-toolbar">
+    <button mat-raised-button
+            color="primary"
+            (click)="onCreate()">
+        New Employee
+    </button>
+</div>
+
+<div class="cards-grid">
+    <app-employee-card
+            *ngFor="let e of employees; trackBy: trackByEmployeeId"
+            [employee]="e"
+            (edit)="onEdit($event)"
+            (delete)="onDelete($event)">
+    </app-employee-card>
+</div>

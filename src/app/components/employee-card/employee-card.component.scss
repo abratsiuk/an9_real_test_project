@@ -1,0 +1,44 @@
+.employee-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0.75rem;
+
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  flex-grow: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.icon {
+  color: #3f51b5;
+  margin-right: 0.5rem;
+}
+
+mat-card-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}

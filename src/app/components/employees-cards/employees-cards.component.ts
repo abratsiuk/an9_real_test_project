@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { IEmployeeData } from '../../models/iemployee-data.model';
 import { Router } from '@angular/router';
 
@@ -6,6 +13,7 @@ import { Router } from '@angular/router';
   selector: 'app-employees-cards',
   templateUrl: './employees-cards.component.html',
   styleUrls: ['./employees-cards.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesCardsComponent implements OnInit {
   @Input() employees: IEmployeeData[] = [];
@@ -25,5 +33,9 @@ export class EmployeesCardsComponent implements OnInit {
 
   onDelete(employee: IEmployeeData): void {
     this.delete.emit(employee);
+  }
+
+  trackByEmployeeId(index: number, employee: IEmployeeData): number {
+    return employee.id;
   }
 }
