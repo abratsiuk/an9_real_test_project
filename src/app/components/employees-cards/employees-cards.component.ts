@@ -1,6 +1,18 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { IEmployeeData } from '../../models/iemployee-data.model';
 import { Router } from '@angular/router';
+import { EmployeesDataSource } from '../../data/employees-data-source';
+import { MatPaginator } from '@angular/material/paginator';
+import { EmployeesService } from '../../services/employees.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employees-cards',
@@ -8,11 +20,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./employees-cards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeesCardsComponent {
-  @Input() employees: IEmployeeData[] = [];
+export class EmployeesCardsComponent implements AfterViewInit {
   @Output() deleteEmployee = new EventEmitter<IEmployeeData>();
+  dataSource = new EmployeesDataSource(this.employeesService);
 
-  constructor(private router: Router) {}
+  defaultSortField = 'lastName';
+  defaultSortOrder: 'asc' | 'desc' = 'asc';
+  defaultPageSize = 10;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router,
+    private employeesService: EmployeesService,
+  ) {}
+
+  ngAfterViewInit(): void {
+    // Первичная загрузка
+    // Отложенная первая загрузка — после завершения текущего tick
+    Promise.resolve().then(() => {
+      this.dataSource.load(0, this.defaultPageSize, this.defaultSortField, this.defaultSortOrder);
+      this.changeDetectorRef.markForCheck();
+    });
+
+    // Реакция на смену сортировки/страницы
+    this.paginator.page.pipe(tap(() => this.loadPage())).subscribe();
+  }
+
+  loadPage(): void {
+    const sortField = this.defaultSortField;
+    const sortOrder = this.defaultSortOrder as 'asc' | 'desc';
+    this.dataSource.load(
+      this.paginator.pageIndex,
+      this.paginator.pageSize || this.defaultPageSize,
+      sortField,
+      sortOrder,
+    );
+  }
 
   onCreate(): void {
     this.router.navigate(['employee', 'new']);

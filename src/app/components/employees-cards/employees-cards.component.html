@@ -1,3 +1,9 @@
+<mat-paginator
+        [length]="(dataSource.total$ | async) || 0"
+        [pageSize]="defaultPageSize"
+        [pageSizeOptions]="[5,10,25,50]">
+</mat-paginator>
+
 <div class="cards-toolbar">
     <button mat-raised-button
             color="primary"
@@ -5,10 +11,16 @@
         New Employee
     </button>
 </div>
-
+<mat-progress-bar *ngIf="dataSource.loading$ | async"
+        mode="indeterminate"></mat-progress-bar>
+<div class="empty-state"
+        *ngIf="(dataSource.total$ | async) === 0 && !(dataSource.loading$ | async)">
+    <mat-icon>info</mat-icon>
+    <span>No employees found.</span>
+</div>
 <div class="cards-grid">
     <app-employee-card
-            *ngFor="let e of employees; trackBy: trackByEmployeeId"
+            *ngFor="let e of (dataSource.data$ | async); trackBy: trackByEmployeeId"
             [employee]="e"
             (edit)="onEdit($event)"
             (delete)="onDelete($event)">

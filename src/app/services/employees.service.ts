@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IEmployeeData } from '../models/iemployee-data.model';
@@ -8,6 +8,7 @@ import { IEmployeeRead } from '../models/iemployee-read.model';
 import { IEmployeeCreate } from '../models/iemployee-create.model';
 import { IEmployeeUpdate } from '../models/iemployee-update.model';
 import { IEmployeeCanDelete } from '../models/iemployee-can-delete.model';
+import { IPageResult } from '../models/ipage-result.model';
 
 @Injectable({
   providedIn: 'root',
@@ -77,5 +78,27 @@ export class EmployeesService {
         return of({ canDelete: false, reason: 'Unexpected error. Please try again.' });
       }),
     );
+  }
+
+  getEmployeesPage(
+    pageIndex: number,
+    pageSize: number,
+    sortField: string,
+    sortOrder: 'asc' | 'desc',
+  ) {
+    const params = new HttpParams()
+      .set('page', pageIndex.toString())
+      .set('pageSize', pageSize.toString())
+      .set('sort', sortField)
+      .set('order', sortOrder || 'asc');
+
+    return this.http
+      .get<IPageResult<IEmployeeData>>(`${this.baseUrl}/api/employees/page`, { params })
+      .pipe(
+        catchError((err) => {
+          console.error('getEmployeesPage error', err);
+          return of({ data: [], totalCount: 0 } as IPageResult<IEmployeeData>);
+        }),
+      );
   }
 }

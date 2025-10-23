@@ -8,7 +8,7 @@ import { IEmployeeData } from '../../models/iemployee-data.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeCardComponent {
-  @Input() employee: IEmployeeData;
+  @Input() employee!: IEmployeeData;
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<IEmployeeData>();
 

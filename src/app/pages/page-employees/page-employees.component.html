@@ -1,10 +1,8 @@
 <app-employees-cards *ngIf="isMobile$|async;else employeesTable"
-        [employees]="employees || []"
         (deleteEmployee)="onDelete($event)"
 ></app-employees-cards>
 <ng-template #employeesTable>
     <app-employees
-            [employees]="employees || []"
             (deleteEmployee)="onDelete($event)"
     ></app-employees>
 </ng-template>
