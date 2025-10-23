@@ -25,7 +25,10 @@ import {EmployeesComponent} from './components/employees/employees.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
+import {LayoutModule} from '@angular/cdk/layout';
+import { EmployeesCardsComponent } from './components/employees-cards/employees-cards.component';
+import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +39,11 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     EmployeesComponent,
     NotFoundComponent,
     ConfirmationDialogComponent,
+    EmployeesCardsComponent,
+    EmployeeCardComponent,
   ],
   imports: [
+    LayoutModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,

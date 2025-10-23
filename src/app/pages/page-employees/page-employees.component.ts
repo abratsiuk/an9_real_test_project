@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { EmployeesService } from '../../services/employees.service';
 import { IEmployeeData } from '../../models/iemployee-data.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-page-employees',
@@ -15,11 +16,15 @@ import { ConfirmationDialogComponent } from '../../components/confirmation-dialo
 export class PageEmployeesComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   employees: IEmployeeData[] | null = null;
+  isMobile$ = this.breakpointObserver
+    .observe(['(max-width: 600px)'])
+    .pipe(map((result) => result.matches));
 
   constructor(
     private employeesService: EmployeesService,
     private snack: MatSnackBar,
     private dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver,
   ) {}
 
   ngOnInit(): void {
