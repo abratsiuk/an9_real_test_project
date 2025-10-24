@@ -1,0 +1,43 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sort-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.sort-select {
+  width: 180px;
+  min-width: 140px;
+}
+
+.sort-control .label {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Придать виду селекту как у MatPaginator ( underline, компактный, без подсказок ) */
+:host ::ng-deep .paginator-like .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+:host ::ng-deep .paginator-like .mat-form-field-subscript-wrapper {
+  display: none;
+} /* скрыть хелп/ошибку */
+:host ::ng-deep .paginator-like .mat-form-field-infix {
+  padding: 0.25rem 0;
+  border-top: 0.25em solid transparent;
+}
+:host ::ng-deep .paginator-like .mat-select-trigger {
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  :host,
+  .sort-control {
+    width: 100%;
+  }
+}

@@ -1,8 +1,14 @@
-<mat-paginator
-        [length]="(dataSource.total$ | async) || 0"
-        [pageSize]="defaultPageSize"
-        [pageSizeOptions]="[5,10,25,50]">
-</mat-paginator>
+<div class="controls">
+    <app-sort-control [sortFields]="sortFields"
+            [defaultSortField]="defaultSortField"
+            [defaultSortOrder]="'asc'"
+            (sortChange)="onSortChange($event)"></app-sort-control>
+    <mat-paginator
+            [length]="(dataSource.total$ | async) || 0"
+            [pageSize]="defaultPageSize"
+            [pageSizeOptions]="[5,10,25,50]">
+    </mat-paginator>
+</div>
 
 <div class="cards-toolbar">
     <button mat-raised-button

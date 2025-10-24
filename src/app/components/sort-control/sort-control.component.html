@@ -1,0 +1,20 @@
+<div class="sort-control">
+    <span class="label">Sort:</span>
+
+    <mat-form-field appearance="standard"
+            class="paginator-like sort-select"
+            floatLabel="never">
+        <mat-select [value]="currentSortField"
+                (selectionChange)="onSortedFieldChange($event.value)">
+            <mat-option *ngFor="let f of sortFields"
+                    [value]="f.fieldCode">
+                {{f.fieldName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button
+            (click)="toggleSortOrder()">
+        <mat-icon>{{currentSortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>
+    </button>
+</div>

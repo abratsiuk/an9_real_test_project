@@ -33,6 +33,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SortControlComponent } from './components/sort-control/sort-control.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ConfirmationDialogComponent,
     EmployeesCardsComponent,
     EmployeeCardComponent,
+    SortControlComponent,
   ],
   imports: [
     LayoutModule,

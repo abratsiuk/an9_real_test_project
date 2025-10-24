@@ -17,7 +17,7 @@ export class PageEmployeesComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   employees: IEmployeeData[] | null = null;
   isMobile$ = this.breakpointObserver
-    .observe(['(max-width: 600px)'])
+    .observe(['(max-width: 1200px)'])
     .pipe(map((result) => result.matches));
 
   constructor(
