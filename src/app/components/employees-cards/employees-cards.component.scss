@@ -12,33 +12,6 @@
   flex-wrap: nowrap;
 }
 
-/* заставляем paginator быть компактным (не на всю ширину) */
-.paginator-compact {
-  /* сам тег paginator */
-  display: inline-flex;
-  width: auto;
-}
-
-/* правки внутренних контейнеров MatPaginator */
-:host ::ng-deep .paginator-compact .mat-paginator-outer-container {
-  width: auto;
-}
-
-:host ::ng-deep .paginator-compact .mat-paginator-container {
-  flex-wrap: nowrap; /* не переносить элементы */
-  justify-content: flex-end; /* прижим к правому краю */
-  gap: 8px;
-}
-
-:host ::ng-deep .paginator-compact .mat-paginator-page-size {
-  margin-right: 8px; /* небольшой отступ перед стрелками */
-  white-space: nowrap; /* подпись размера в одну строку */
-}
-
-:host ::ng-deep .paginator-compact .mat-paginator-range-actions {
-  flex-wrap: nowrap;
-}
-
 /* мобильный режим: сортировка над пагинацией */
 @media (max-width: 600px) {
   .controls {
