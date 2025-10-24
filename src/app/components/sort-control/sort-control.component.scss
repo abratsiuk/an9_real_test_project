@@ -5,39 +5,26 @@
 
 .sort-control {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
-}
-.sort-select {
-  width: 180px;
-  min-width: 140px;
+
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 12px;
 }
 
-.sort-control .label {
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.7);
+.mat-icon {
+  font-size: 22px;
 }
 
-/* Придать виду селекту как у MatPaginator ( underline, компактный, без подсказок ) */
-:host ::ng-deep .paginator-like .mat-form-field-wrapper {
-  padding-bottom: 0;
-}
-:host ::ng-deep .paginator-like .mat-form-field-subscript-wrapper {
-  display: none;
-} /* скрыть хелп/ошибку */
-:host ::ng-deep .paginator-like .mat-form-field-infix {
-  padding: 0.25rem 0;
-  border-top: 0.25em solid transparent;
-}
-:host ::ng-deep .paginator-like .mat-select-trigger {
-  height: 32px;
-  display: flex;
-  align-items: center;
+/* уменьшаем ширину выпадающего списка (панели mat-select) */
+:host ::ng-deep .mat-select-panel {
+  min-width: 120px !important; /* можно подстроить: 120–160px */
+  width: 120px !important;
+  max-width: 140px;
 }
 
-@media (max-width: 600px) {
-  :host,
-  .sort-control {
-    width: 100%;
-  }
+/* чтобы само поле было не шире */
+.sort-select.mat-form-field {
+  width: 120px;
+  min-width: 100px;
 }
