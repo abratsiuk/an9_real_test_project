@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { IEmployeeData } from '../models/iemployee-data.model';
-import { IEmployeeOption } from '../models/iemployee-option.model';
-import { IEmployeeRead } from '../models/iemployee-read.model';
-import { IEmployeeCreate } from '../models/iemployee-create.model';
-import { IEmployeeUpdate } from '../models/iemployee-update.model';
-import { IEmployeeCanDelete } from '../models/iemployee-can-delete.model';
-import { IPageResult } from '../models/ipage-result.model';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {IEmployeeData} from '../models/iemployee-data.model';
+import {IEmployeeOption} from '../models/iemployee-option.model';
+import {IEmployeeRead} from '../models/iemployee-read.model';
+import {IEmployeeCreate} from '../models/iemployee-create.model';
+import {IEmployeeUpdate} from '../models/iemployee-update.model';
+import {IEmployeeCanDelete} from '../models/iemployee-can-delete.model';
+import {IPageResult} from '../models/ipage-result.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeesService {
-  baseUrl = 'http://localhost:5260';
+  baseUrl = 'https://back-test-api.onrender.com';
 
   constructor(private http: HttpClient) {}
 

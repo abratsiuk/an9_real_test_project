@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DepartmentsService {
-  baseUrl = 'http://localhost:5260';
+  baseUrl = 'https://back-test-api.onrender.com';
 
   constructor(private http: HttpClient) {}
 
