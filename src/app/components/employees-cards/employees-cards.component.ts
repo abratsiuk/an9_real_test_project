@@ -1,20 +1,20 @@
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Output,
-    ViewChild,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Output,
+  ViewChild,
 } from '@angular/core';
-import {IEmployeeData} from '../../models/iemployee-data.model';
-import {Router} from '@angular/router';
-import {EmployeesDataSource} from '../../data/employees-data-source';
-import {MatPaginator} from '@angular/material/paginator';
-import {EmployeesService} from '../../services/employees.service';
-import {tap} from 'rxjs/operators';
-import {ISortedField} from '../../models/isorted-field.model';
-import {ISort} from '../../models/isort.model';
+import { IEmployeeData } from '../../models/iemployee-data.model';
+import { Router } from '@angular/router';
+import { EmployeesDataSource } from '../../data/employees-data-source';
+import { MatPaginator } from '@angular/material/paginator';
+import { EmployeesService } from '../../services/employees.service';
+import { tap } from 'rxjs/operators';
+import { ISortedField } from '../../models/isorted-field.model';
+import { ISort } from '../../models/isort.model';
 
 @Component({
   selector: 'app-employees-cards',
