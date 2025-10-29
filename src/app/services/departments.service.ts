@@ -3,12 +3,13 @@ import { Observable, of } from 'rxjs';
 import { IDepartment } from '../models/idepartment.model';
 import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DepartmentsService {
-  baseUrl = 'https://back-test-api.onrender.com';
+  baseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 

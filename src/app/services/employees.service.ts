@@ -9,12 +9,13 @@ import {IEmployeeCreate} from '../models/iemployee-create.model';
 import {IEmployeeUpdate} from '../models/iemployee-update.model';
 import {IEmployeeCanDelete} from '../models/iemployee-can-delete.model';
 import {IPageResult} from '../models/ipage-result.model';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeesService {
-  baseUrl = 'https://back-test-api.onrender.com';
+  baseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
