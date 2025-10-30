@@ -16,14 +16,12 @@
   font-size: 22px;
 }
 
-/* уменьшаем ширину выпадающего списка (панели mat-select) */
 :host ::ng-deep .mat-select-panel {
-  min-width: 120px !important; /* можно подстроить: 120–160px */
+  min-width: 120px !important;
   width: 120px !important;
   max-width: 140px;
 }
 
-/* чтобы само поле было не шире */
 .sort-select.mat-form-field {
   width: 120px;
   min-width: 100px;

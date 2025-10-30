@@ -3,7 +3,6 @@
   padding: 1rem;
 }
 
-/* общий контейнер: сортировка слева, пагинация справа */
 .controls {
   display: flex;
   align-items: center;
@@ -12,7 +11,6 @@
   flex-wrap: nowrap;
 }
 
-/* мобильный режим: сортировка над пагинацией */
 @media (max-width: 600px) {
   .controls {
     flex-direction: column;
@@ -21,7 +19,7 @@
   }
 
   .paginator-compact {
-    align-self: flex-end; /* визуально приятнее, но можно убрать */
+    align-self: flex-end;
   }
 }
 
