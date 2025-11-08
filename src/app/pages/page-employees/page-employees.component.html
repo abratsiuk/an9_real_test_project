@@ -1,8 +1,4 @@
-<app-employees-cards *ngIf="isMobile$|async;else employeesTable"
-        (deleteEmployee)="onDelete($event)"
-></app-employees-cards>
+<app-employees-cards *ngIf="isMobile$|async;else employeesTable"></app-employees-cards>
 <ng-template #employeesTable>
-    <app-employees
-            (deleteEmployee)="onDelete($event)"
-    ></app-employees>
+    <app-employees></app-employees>
 </ng-template>

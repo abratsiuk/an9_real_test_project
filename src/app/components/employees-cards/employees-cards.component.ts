@@ -3,8 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { IEmployeeData } from '../../models/iemployee-data.model';
@@ -12,9 +10,13 @@ import { Router } from '@angular/router';
 import { EmployeesDataSource } from '../../data/employees-data-source';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeesService } from '../../services/employees.service';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { ISortedField } from '../../models/isorted-field.model';
 import { ISort } from '../../models/isort.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-employees-cards',
@@ -23,7 +25,8 @@ import { ISort } from '../../models/isort.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesCardsComponent implements AfterViewInit {
-  @Output() deleteEmployee = new EventEmitter<IEmployeeData>();
+  // @Output() deleteEmployee = new EventEmitter<IEmployeeData>();
+  private destroy$ = new Subject<void>();
   dataSource = new EmployeesDataSource(this.employeesService);
 
   defaultSortField = 'lastName';
@@ -45,6 +48,8 @@ export class EmployeesCardsComponent implements AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
     private employeesService: EmployeesService,
+    private snack: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngAfterViewInit(): void {
@@ -77,7 +82,56 @@ export class EmployeesCardsComponent implements AfterViewInit {
   }
 
   onDelete(employee: IEmployeeData): void {
-    this.deleteEmployee.emit(employee);
+    this.employeesService
+      .canDelete(employee.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
+        if (!result.canDelete) {
+          this.snack.open(result.reason || 'Cannot delete employee.', 'Dismiss', {
+            duration: 3000,
+          });
+          return;
+        }
+
+        this.openDeleteConfirmationDialog(employee);
+      });
+  }
+  private openDeleteConfirmationDialog(employee: IEmployeeData): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '25rem',
+      data: {
+        title: 'Delete Employee',
+        message:
+          `Are you sure you want to delete ` +
+          ` <b>${employee.firstName} ${employee.lastName}</b> (${employee.departmentName}) ?`,
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.deleteEmployee(employee.id);
+      }
+    });
+  }
+  private deleteEmployee(id: number): void {
+    this.employeesService
+      .deleteEmployee(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        () => {
+          this.snack.open('Employee deleted successfully.', 'OK', {
+            duration: 3000,
+          });
+          this.loadPage();
+        },
+        (err) => {
+          this.snack.open('Delete failed. Please try again.', 'Dismiss', {
+            duration: 4000,
+          });
+        },
+      );
   }
 
   trackByEmployeeId(index: number, employee: IEmployeeData): number {

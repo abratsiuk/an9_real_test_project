@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {IEmployeeData} from '../models/iemployee-data.model';
-import {IEmployeeOption} from '../models/iemployee-option.model';
-import {IEmployeeRead} from '../models/iemployee-read.model';
-import {IEmployeeCreate} from '../models/iemployee-create.model';
-import {IEmployeeUpdate} from '../models/iemployee-update.model';
-import {IEmployeeCanDelete} from '../models/iemployee-can-delete.model';
-import {IPageResult} from '../models/ipage-result.model';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { IEmployeeData } from '../models/iemployee-data.model';
+import { IEmployeeOption } from '../models/iemployee-option.model';
+import { IEmployeeRead } from '../models/iemployee-read.model';
+import { IEmployeeCreate } from '../models/iemployee-create.model';
+import { IEmployeeUpdate } from '../models/iemployee-update.model';
+import { IEmployeeCanDelete } from '../models/iemployee-can-delete.model';
+import { IPageResult } from '../models/ipage-result.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +19,14 @@ export class EmployeesService {
 
   constructor(private http: HttpClient) {}
 
-  loadEmployeesData(): Observable<IEmployeeData[] | null> {
-    return this.http.get<IEmployeeData[]>(`${this.baseUrl}/api/employees`).pipe(
-      catchError((err) => {
-        console.error('loadEmployeesData error', err);
-        return of(null as IEmployeeData[] | null);
-      }),
-    );
-  }
+  // loadEmployeesData(): Observable<IEmployeeData[] | null> {
+  //   return this.http.get<IEmployeeData[]>(`${this.baseUrl}/api/employees`).pipe(
+  //     catchError((err) => {
+  //       console.error('loadEmployeesData error', err);
+  //       return of(null as IEmployeeData[] | null);
+  //     }),
+  //   );
+  // }
 
   getOptions(): Observable<IEmployeeOption[] | null> {
     return this.http.get<IEmployeeOption[]>(`${this.baseUrl}/api/employees/options`).pipe(
